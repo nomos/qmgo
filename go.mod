@@ -8,3 +8,5 @@ require (
 	github.com/stretchr/testify v1.6.1
 	go.mongodb.org/mongo-driver v1.5.1
 )
+
+replace go.mongodb.org/mongo-driver v1.5.1 => github.com/nomos/mongo-go-driver v1.1.5
