@@ -22,8 +22,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	officialOpts "go.mongodb.org/mongo-driver/mongo/options"
 
-	"github.com/qiniu/qmgo/operator"
-	"github.com/qiniu/qmgo/options"
+	"github.com/nomos/qmgo/operator"
+	"github.com/nomos/qmgo/options"
 )
 
 func TestCollection_EnsureIndex(t *testing.T) {

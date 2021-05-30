@@ -23,7 +23,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/qiniu/qmgo/options"
+	"github.com/nomos/qmgo/options"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/bsoncodec"
 	"go.mongodb.org/mongo-driver/mongo"

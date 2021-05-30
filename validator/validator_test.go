@@ -1,7 +1,7 @@
 package validator
 
 import (
-	"github.com/qiniu/qmgo/operator"
+	"github.com/nomos/qmgo/operator"
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
 	"testing"

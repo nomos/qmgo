@@ -1,4 +1,4 @@
-package mgo
+package qmgo
 
 import (
 	"bytes"
