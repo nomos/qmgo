@@ -14,9 +14,12 @@
 package qmgo
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"github.com/shopspring/decimal"
 	"net/url"
+	"reflect"
 	"strings"
 	"time"
 
@@ -135,6 +138,14 @@ type Client struct {
 
 // NewClient creates Qmgo MongoDB client
 func NewClient(ctx context.Context, conf *Config, o ...options.ClientOptions) (cli *Client, err error) {
+	customOpt := opts.Client().
+		SetRegistry(bson.NewRegistryBuilder().
+			RegisterTypeEncoder(reflect.TypeOf(decimal.Decimal{}), Decimal{}).
+			RegisterTypeDecoder(reflect.TypeOf(decimal.Decimal{}), Decimal{}).
+			RegisterTypeEncoder(reflect.TypeOf(&bytes.Buffer{}), BufferType{}).
+			RegisterTypeDecoder(reflect.TypeOf(&bytes.Buffer{}), BufferType{}).
+			Build())
+	o = append(o,options.ClientOptions{ClientOptions:customOpt})
 	opt, err := newConnectOpts(conf, o...)
 	if err != nil {
 		return nil, err
