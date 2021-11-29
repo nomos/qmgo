@@ -18,6 +18,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/shopspring/decimal"
+	"go.mongodb.org/mongo-driver/bson/bsonoptions"
 	"net/url"
 	"reflect"
 	"strings"
@@ -144,6 +145,8 @@ func NewClient(ctx context.Context, conf *Config, o ...options.ClientOptions) (c
 			RegisterTypeDecoder(reflect.TypeOf(decimal.Decimal{}), Decimal{}).
 			RegisterTypeEncoder(reflect.TypeOf(&bytes.Buffer{}), BufferType{}).
 			RegisterTypeDecoder(reflect.TypeOf(&bytes.Buffer{}), BufferType{}).
+			RegisterTypeEncoder(reflect.TypeOf(&time.Time{}),bsoncodec.NewTimeCodec(bsonoptions.TimeCodec().SetUseLocalTimeZone(true))).
+			RegisterTypeDecoder(reflect.TypeOf(&time.Time{}),bsoncodec.NewTimeCodec(bsonoptions.TimeCodec().SetUseLocalTimeZone(true))).
 			Build())
 	o = append(o,options.ClientOptions{ClientOptions:customOpt})
 	opt, err := newConnectOpts(conf, o...)
