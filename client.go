@@ -143,12 +143,12 @@ func NewClient(ctx context.Context, conf *Config, o ...options.ClientOptions) (c
 		SetRegistry(bson.NewRegistryBuilder().
 			RegisterTypeEncoder(reflect.TypeOf(decimal.Decimal{}), Decimal{}).
 			RegisterTypeDecoder(reflect.TypeOf(decimal.Decimal{}), Decimal{}).
-			RegisterTypeEncoder(reflect.TypeOf(&bytes.Buffer{}), BufferType{}).
-			RegisterTypeDecoder(reflect.TypeOf(&bytes.Buffer{}), BufferType{}).
-			RegisterTypeEncoder(reflect.TypeOf(&time.Time{}),bsoncodec.NewTimeCodec(bsonoptions.TimeCodec().SetUseLocalTimeZone(true))).
-			RegisterTypeDecoder(reflect.TypeOf(&time.Time{}),bsoncodec.NewTimeCodec(bsonoptions.TimeCodec().SetUseLocalTimeZone(true))).
+			RegisterTypeEncoder(reflect.TypeOf(bytes.Buffer{}), BufferType{}).
+			RegisterTypeDecoder(reflect.TypeOf(bytes.Buffer{}), BufferType{}).
+			RegisterTypeEncoder(reflect.TypeOf(time.Time{}), bsoncodec.NewTimeCodec(bsonoptions.TimeCodec().SetUseLocalTimeZone(true))).
+			RegisterTypeDecoder(reflect.TypeOf(time.Time{}), bsoncodec.NewTimeCodec(bsonoptions.TimeCodec().SetUseLocalTimeZone(true))).
 			Build())
-	o = append(o,options.ClientOptions{ClientOptions:customOpt})
+	o = append(o, options.ClientOptions{ClientOptions: customOpt})
 	opt, err := newConnectOpts(conf, o...)
 	if err != nil {
 		return nil, err
